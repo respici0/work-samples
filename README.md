@@ -1,3 +1,3 @@
-[robertpaulrespicio.com](www.robertpaulrespicio.com)
+# Work Samples
 
-# Work Samples Description
+[robertpaulrespicio.com](robertpaulrespicio.com)
