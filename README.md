@@ -7,4 +7,4 @@ This repository is a broad selection of code samples, selected to show examples 
 --------------------
 
 ##### C# Endpoints (JS, SMSS/T-SQL, C#) - OCTOBER 2018
-Endspoints used to communicate from SQL to C# API to ReactJs through axios calls.
+Endspoints used to communicate SQL to C# API to ReactJs through axios calls.
