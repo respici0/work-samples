@@ -2,7 +2,7 @@ import axios from "axios";
 
 class *Service {
   static postLog(data, onSuccess, onError) {
-    const url = ;
+    const url =;
     const config = {
       method: "POST",
       data: data
@@ -14,7 +14,7 @@ class *Service {
   }
 
   static retrievePageOfLogs(page, numberOfRows, onSuccess, onError) {
-    const url = ;
+    const url =;
     const config = {
       method: "POST"
     };
