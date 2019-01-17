@@ -280,8 +280,6 @@ class AdminPanel extends React.Component {
     }
   };
 
-  // onReset = () => window.location.reload();
-
   render() {
     const arrayOfPagedLogs = this.state.arrayOfLogs.map((log, idx) => {
       return (
