@@ -1,0 +1,176 @@
+USE [C61]
+GO
+/****** Object:  StoredProcedure [dbo].[Logs_Insert]    Script Date: 1/16/2019 8:24:08 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROC [dbo].[Logs_Insert]
+--Parameters
+@Id INT OUT,
+@Date DATETIME,
+@Thread VARCHAR(255),
+@Level VARCHAR(50),
+@Logger VARCHAR(255),
+@Message VARCHAR(4000),
+@Exception VARCHAR(2000) = null
+AS
+/*
+declare @_id int
+exec Logs_Insert @_id out, '2000-10-13', 'help me', 'Warning', 'Log LOGGER what ok where yes sabio', '404 Not Found'	
+*/
+BEGIN
+--Body of the Stored Proc
+	INSERT INTO Logs (Date, Thread, Level, Logger, Message, Exception)
+	VALUES (@Date, @Thread, @Level, @Logger, @Message, @Exception)
+
+	SET @Id = SCOPE_IDENTITY()
+END
+
+// PROC TO MAKE MORE LOGS FOR TESTING //
+
+USE [C61]
+GO
+/****** Object:  StoredProcedure [dbo].[Logs_MakeMoreLogs]    Script Date: 1/16/2019 8:28:40 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROC [dbo].[Logs_MakeMoreLogs]
+AS
+declare
+	@currCnt int = 1,
+	@maxCnt int = 100,
+	@thread nvarchar(10) = 'thread',
+	@date datetime = '2001-10-13',
+	@level nvarchar(10) = 'Debug',
+	@logger nvarchar(10) = 'logger',
+	@msg nvarchar(10) = 'Error at yada yada',
+	@ex nvarchar(10) = 'exception'
+
+while @currCnt < @maxCnt
+begin
+	insert into logs (
+		date, 
+		thread, 
+		level, 
+		logger, 
+		message, 
+		exception
+	) values (
+		@date,
+		@thread + convert(nvarchar(25), @currCnt),
+		@level,
+		@logger + convert(nvarchar(25), @currCnt),
+		@msg + convert(nvarchar(25), @currCnt),
+		@ex + convert(nvarchar(25), @currCnt)
+	);
+	set @currCnt = @currCnt + 1
+end
+select count(*) from logs
+select * from logs
+
+/PROC with pagination, search, sort & filtering/
+
+USE [C61]
+GO
+/****** Object:  StoredProcedure [dbo].[Logs_Search]    Script Date: 1/16/2019 8:29:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROC [dbo].[Logs_Search]
+	@dateStart DATETIME = null,
+	@dateEnd DATETIME = null,
+	@levelType NVARCHAR (10),
+	@search NVARCHAR (500) = null,
+	@sortBy NVARCHAR (10),
+	@sortOrder NVARCHAR (4),
+	@pageNumber INT,
+	@rowsToDisplay INT	
+AS
+/*
+declare 
+@dateStart datetime = '10-13-2005',
+@dateEnd datetime  = '10-26-2018',
+@levelType NVARCHAR(10) = '',
+@search varchar(500) = '', 
+@sortBy varchar(10) = 'Date', 
+@sortOrder nvarchar(4)='ASC', 
+@pageNumber int = 1, 
+@rowsToDisplay int = 1000
+
+exec Logs_Search 
+@dateStart,
+@dateEnd,
+@levelType,
+@search, 
+@sortBy, 
+@sortOrder, 
+@pageNumber, 
+@rowsToDisplay
+*/
+BEGIN
+SELECT
+	Id,
+	Date,
+	Thread,
+	Level,
+	Logger,
+	Message,
+	Exception
+FROM Logs
+WHERE 
+	Level LIKE ('%' + @levelType + '%' )	
+	--Level IN (SELECT CAST(VALUE AS NVARCHAR) FROM string_split(@filterLevel, ','))
+	AND ( 
+		(Message LIKE ('%' + @search + '%'))
+		OR
+		(Logger LIKE ('%' + @search + '%'))
+		)
+	AND (@dateStart IS NULL OR Date >= @dateStart)		
+	AND (@dateEnd IS NULL OR Date < (@dateEnd+1))
+ORDER BY
+	CASE WHEN @sortBy = 'Id' AND @sortOrder = 'ASC'
+		then Id END ASC,
+	CASE WHEN @sortBy = 'Id' AND @sortOrder = 'DESC'
+		then Id END DESC,
+	CASE WHEN @sortBy = 'Date' AND @sortOrder = 'ASC'
+		then Date END ASC,
+	CASE WHEN @sortBy = 'Date' AND @sortOrder = 'DESC'
+		then Date END DESC,
+	CASE WHEN @sortBy = 'Thread' AND @sortOrder = 'ASC'
+		then Thread END ASC,
+	CASE WHEN @sortBy = 'Thread' AND @sortOrder = 'DESC'
+		then Thread END DESC,
+	CASE WHEN @sortBy = 'Level' AND @sortOrder = 'ASC'
+		then Level END ASC,
+	CASE WHEN @sortBy = 'Level' AND @sortOrder = 'DESC'
+		then Level END DESC,
+	CASE WHEN @sortBy = 'Logger' AND @sortOrder = 'ASC'
+		then Logger END ASC,
+	CASE WHEN @sortBy = 'Logger' AND @sortOrder = 'DESC'
+		then Logger END DESC
+OFFSET (@pageNumber - 1) * @rowsToDisplay
+ROWS FETCH NEXT @rowsToDisplay ROWS ONLY;
+END
+
+/TRUNCATE Logs/
+
+USE [C61]
+GO
+/****** Object:  StoredProcedure [dbo].[Logs_DeleteAll]    Script Date: 1/16/2019 8:31:04 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROC [dbo].[Logs_DeleteAll]
+AS 
+/*
+exec Logs_deleteall
+*/
+BEGIN
+TRUNCATE TABLE Logs
+END
+
+

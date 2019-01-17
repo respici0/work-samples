@@ -1,0 +1,65 @@
+USE [C61]
+GO
+/****** Object:  StoredProcedure [dbo].[OrganizationUsers_SelectAllByOrgId]    Script Date: 1/16/2019 8:33:30 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROC [dbo].[OrganizationUsers_SelectAllByOrgId]
+@Id INT 
+AS 
+/* 
+DECLARE @_orgId = '12'
+EXEC OrganizationUsers_SelectAllByUserId
+*/
+BEGIN 
+SELECT * FROM OrganizationUsers
+WHERE OrgId = @Id;
+END
+
+
+USE [C61]
+GO
+/****** Object:  StoredProcedure [dbo].[OrganizationUsers_SelectAllByUserId]    Script Date: 1/16/2019 8:33:42 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROC [dbo].[OrganizationUsers_SelectAllByUserId]
+@Id INT
+AS
+/**/
+BEGIN
+SELECT * FROM OrganizationUsers
+WHERE UserId = @Id;
+END
+
+
+USE [C61]
+GO
+/****** Object:  StoredProcedure [dbo].[OrganizationUsers_GetAll]    Script Date: 1/16/2019 8:34:02 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROC [dbo].[OrganizationUsers_GetAll]
+AS
+/*
+EXEC Organizationusers_GetAll
+*/
+BEGIN
+    SELECT DISTINCT
+        u.Id as UserId, u.Email, u.UserName,
+        p.FirstName, p.MiddleInitial, p.LastName, p.Gender,
+        pf.Bio, pf.Title,
+        fs.BasePath, fs.SystemFileName,
+		ou.OrgId,
+		fs.Id as ImageId
+    FROM
+        Users u left JOIN Person p on u.Id = p.UserId
+        left JOIN Profile pf on u.Id = pf.UserId
+        left JOIN ProfileImage pi on u.Id = pi.UserId
+        left JOIN FileStorage fs on pi.FileStorageId = fs.Id
+		left JOIN PersonPhone pp on u.Id = pp.UserId
+		left JOIN OrganizationUsers ou on u.Id = ou.UserId
+END 
