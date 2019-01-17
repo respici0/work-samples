@@ -10,15 +10,7 @@ class OrganizationConnections extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userIds: [],
-            currentUser: {},
-            currentRoleId: "",
-            arrayOfUsers: [],
-            orgPeopleArray: [],
-            organization: [],
-            phoneNumbers: [],
-            signedInUsers: {},
-            active: false
+            
         };
     }
 
