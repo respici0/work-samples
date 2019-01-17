@@ -21,7 +21,7 @@ class AdminPanel extends React.Component {
       this.searchedLogsSuccess,
       this.searchedLogsError
     );
-    LogsService.getAllLogs(this.onGetAllLogsSuccess, this.onGetAllLogsError);
+    *Service.getAllLogs(this.onGetAllLogsSuccess, this.onGetAllLogsError);
   }
 
   handleNextButton = () => {
@@ -37,12 +37,12 @@ class AdminPanel extends React.Component {
           page: nextPage + 1
         },
         () => {
-          LogsService.searchedLogs(
+          *Service.searchedLogs(
             this.state,
             this.searchedLogsSuccess,
             this.searchedLogsError
           );
-          LogsService.getAllLogs(
+          *Service.getAllLogs(
             this.onGetAllLogsSuccess,
             this.onGetAllLogsError
           );
@@ -62,7 +62,7 @@ class AdminPanel extends React.Component {
           page: prevPage - 1
         },
         () => {
-          LogsService.searchedLogs(
+         *Service.searchedLogs(
             this.state,
             this.searchedLogsSuccess,
             this.searchedLogsError
@@ -86,16 +86,16 @@ class AdminPanel extends React.Component {
   searchedLogsError = response => console.log(response);
 
   handleDeleteAll = () => {
-    LogsService.deleteAllLogs(this.onDeleteAllSuccess, this.onDeleteAllError);
+   *Service.deleteAllLogs(this.onDeleteAllSuccess, this.onDeleteAllError);
   };
 
   onDeleteAllSuccess = response => {
-    LogsService.searchedLogs(
+    *Service.searchedLogs(
       this.state,
       this.searchedLogsSuccess,
       this.searchedLogsError
     );
-    LogsService.getAllLogs(this.onGetAllLogsSuccess, this.onGetAllLogsError);
+    *Service.getAllLogs(this.onGetAllLogsSuccess, this.onGetAllLogsError);
   };
 
   onDeleteAllError = response => console.log(response);
@@ -107,7 +107,7 @@ class AdminPanel extends React.Component {
     });
 
   handlePanelDelete = () =>
-    LogsService.deleteLog(
+   *Service.deleteLog(
       this.state.id,
       this.onDeleteLogSuccess,
       this.onDeleteLogError
@@ -117,12 +117,12 @@ class AdminPanel extends React.Component {
     this.setState({
       ...this.state
     });
-    LogsService.searchedLogs(
+    *Service.searchedLogs(
       this.state,
       this.searchedLogsSuccess,
       this.searchedLogsError
     );
-    LogsService.getAllLogs(this.onGetAllLogsSuccess, this.onGetAllLogsError);
+   *Service.getAllLogs(this.onGetAllLogsSuccess, this.onGetAllLogsError);
   };
 
   onDeleteLogError = response => console.log(response);
@@ -141,7 +141,7 @@ class AdminPanel extends React.Component {
               dateStart: "2000-12-12"
             },
             () => {
-              LogsService.searchedLogs(
+              *Service.searchedLogs(
                 this.state,
                 this.searchedLogsSuccess,
                 this.searchedLogsError
@@ -149,7 +149,7 @@ class AdminPanel extends React.Component {
             }
           );
         } else {
-          LogsService.searchedLogs(
+         *Service.searchedLogs(
             this.state,
             this.searchedLogsSuccess,
             this.searchedLogsError
@@ -173,7 +173,7 @@ class AdminPanel extends React.Component {
               dateEnd: "2199-12-12"
             },
             () => {
-              LogsService.searchedLogs(
+             *Service.searchedLogs(
                 this.state,
                 this.searchedLogsSuccess,
                 this.searchedLogsError
@@ -181,7 +181,7 @@ class AdminPanel extends React.Component {
             }
           );
         }
-        LogsService.searchedLogs(
+      *Service.searchedLogs(
           this.state,
           this.searchedLogsSuccess,
           this.searchedLogsError
@@ -203,9 +203,9 @@ class AdminPanel extends React.Component {
       },
       () => {
         if (
-          name === "rowOfLogs" ||
-          name === "levelType" ||
-          name === "searchBox" ||
+          name === "" ||
+          name === "" ||
+          name === "" ||
           value <= 0
         ) {
           this.setState(
@@ -214,24 +214,24 @@ class AdminPanel extends React.Component {
               page: 1
             },
             () => {
-              LogsService.searchedLogs(
+             *Service.searchedLogs(
                 this.state,
                 this.searchedLogsSuccess,
                 this.searchedLogsError
               );
-              LogsService.getAllLogs(
+              *Service.getAllLogs(
                 this.onGetAllLogsSuccess,
                 this.onGetAllLogsError
               );
             }
           );
         } else {
-          LogsService.searchedLogs(
+         *Service.searchedLogs(
             this.state,
             this.searchedLogsSuccess,
             this.searchedLogsError
           );
-          LogsService.getAllLogs(
+          *Service.getAllLogs(
             this.onGetAllLogsSuccess,
             this.onGetAllLogsError
           );
@@ -254,7 +254,7 @@ class AdminPanel extends React.Component {
           isHidden: false
         },
         () =>
-          LogsService.searchedLogs(
+          *Service.searchedLogs(
             this.state,
             this.searchedLogsSuccess,
             this.searchedLogsError
@@ -271,7 +271,7 @@ class AdminPanel extends React.Component {
           isHidden: true
         },
         () =>
-          LogsService.searchedLogs(
+         *Service.searchedLogs(
             this.state,
             this.searchedLogsSuccess,
             this.searchedLogsError
