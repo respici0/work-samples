@@ -1,9 +1,8 @@
 import React from "react";
-import LogsService from "../../services/LogsService";
+import RespicioService from "../../services/LogsService";
 import { connect } from "react-redux";
 import { loginStatus } from "../../redux/UserActions";
 import { withRouter } from "react-router-dom";
-import SweetAlert from "react-bootstrap-sweetalert";
 import DateTime from "react-datetime";
 import "./Date.css";
 const moment = require("moment");
@@ -17,7 +16,7 @@ class AdminPanel extends React.Component {
   }
 
   componentDidMount() {
-    LogsService.searchedLogs(
+    Service.searchedLogs(
       this.state,
       this.searchedLogsSuccess,
       this.searchedLogsError
