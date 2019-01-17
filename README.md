@@ -28,3 +28,6 @@ This is the continuation of the SQL procedures, this page was designed by anothe
 
 ##### Orginization Resource Management Page (ReactJS, SMSS/T-SQL, REDUX, C#) - DECEMBER 2018
 In this react component, I designed a page where employees of the same organization can easily access information of people in the same organization as them. In some cases an employee can be in two or more organizations at once, and this is designed to help them easily navigate the page. Each user has their information displayed and has an accordian style box that reveals a chat box. The chatbox was designed by a co-developer but I created an add-on feature which would display offline/online by listening for a call through websocket.io and redux.
+
+##### Unit Testing (ReactJS, Moq, C#) - OCTOBER 2018
+A few samples of moq unit testing in C# and a simple log form created to quickly add parameters and test logging functionality.
