@@ -13,24 +13,6 @@ class AdminPanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      arrayOfLogs: [],
-      dateStart: "1900-12-12",
-      dateEnd: "2199-12-12",
-      levelType: "",
-      searchBox: "",
-      sortBy: "",
-      sortOrder: "ASC",
-      page: 1,
-      rowOfLogs: 5,
-      hide: false,
-      isHidden: false,
-      show: false,
-      totalRows: [],
-      id: "",
-      exception: "",
-      alert: null,
-      confirmAlert: null,
-      exceptionAlert: null
     };
   }
 
@@ -103,89 +85,6 @@ class AdminPanel extends React.Component {
     });
 
   searchedLogsError = response => console.log(response);
-
-  handleSweetAlert() {
-    const getAlert = () => (
-      <SweetAlert
-        warning
-        showCancel
-        confirmBtnText="Yes, delete it!"
-        confirmBtnBsStyle="danger"
-        cancelBtnBsStyle="default"
-        title="Are you sure?"
-        onConfirm={() => {
-          this.handleDeleteAll();
-          this.confirmAlertPopUp();
-        }}
-        onCancel={() => {
-          this.hideAlert();
-          this.onCancelOfSwtAlert();
-        }}
-      >
-        You will not be able to recover these logs!
-      </SweetAlert>
-    );
-
-    this.setState({
-      alert: getAlert()
-    });
-  }
-
-  handleSingleDeleteSweetAlert() {
-    const getAlert = () => (
-      <SweetAlert
-        warning
-        showCancel
-        confirmBtnText="Yes, delete it!"
-        confirmBtnBsStyle="danger"
-        cancelBtnBsStyle="default"
-        title="Are you sure?"
-        onConfirm={() => {
-          this.handlePanelDelete();
-          this.confirmAlertPopUp();
-        }}
-        onCancel={() => {
-          this.hideAlert();
-          this.onCancelOfSwtAlert();
-        }}
-      >
-        You will not be able to recover this log
-      </SweetAlert>
-    );
-    this.setState({
-      alert: getAlert()
-    });
-  }
-
-  confirmAlertPopUp = () => {
-    const confirmAlert = () => (
-      <SweetAlert success title="Success!" onConfirm={() => this.hideAlert()}>
-        Deleted
-      </SweetAlert>
-    );
-    this.setState({
-      confirmAlert: confirmAlert()
-    });
-  };
-
-  onCancelOfSwtAlert = () => {
-    const confirmAlert = () => (
-      <SweetAlert danger title="Cancelled" onConfirm={() => this.hideAlert()}>
-        Logs are safe
-      </SweetAlert>
-    );
-    this.setState({
-      confirmAlert: confirmAlert()
-    });
-  };
-
-  hideAlert = () => {
-    this.setState({
-      alert: null,
-      confirmAlert: null,
-      exceptionAlert: null
-    });
-  };
 
   handleDeleteAll = () => {
     LogsService.deleteAllLogs(this.onDeleteAllSuccess, this.onDeleteAllError);
