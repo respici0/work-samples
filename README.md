@@ -7,4 +7,4 @@ This repository is a broad selection of code samples, selected to show examples 
 --------------------
 
 ##### C# Endpoints (JS, SMSS/T-SQL, C#) - OCTOBER 2018
-Endspoints used to communicate SQL to C# API to ReactJs through axios calls.
+Endspoints used to communicate SQL to C# API to ReactJs through axios calls. Inside RespicioAPIControllers you can also see the apache framework log4net for logging implemented into the API controllers. I put these into my own controllers to see if it was working correctly and I was instructed to assist my fellow developers and help them correctly leverage logging as well.
