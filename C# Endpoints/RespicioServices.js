@@ -65,7 +65,7 @@ class *Service {
   }
 
   static updateLog(id, data, onSuccess, onError) {
-    const url = `/api/logs/${id}`;
+    const url = ;
     const config = {
       method: "PUT",
       data: data
@@ -77,7 +77,7 @@ class *Service {
   }
 
   static deleteLog(id, onSuccess, onError) {
-    const url = `/api/logs/${id}`;
+    const url =;
     const config = {
       method: "DELETE"
     };
@@ -88,7 +88,7 @@ class *Service {
   }
 
   static deleteAllLogs(onSuccess, onError) {
-    const url = `/api/logs/deleteall`;
+    const url =;
     const config = {
       method: "DELETE"
     };
