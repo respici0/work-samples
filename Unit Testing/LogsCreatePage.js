@@ -1,6 +1,5 @@
 import React from "react";
-import LogsForm from "../logs/LogsForm";
-import LogsService from "../../services/LogsService";
+
 import FormErrors from "../logs/FormErrors";
 import { withRouter, Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
@@ -10,26 +9,9 @@ class LogsCreate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: "",
-      date: "",
-      thread: "",
-      level: "",
-      logger: "",
-      message: "",
-      exception: "",
-      formErrors: {
-        date: "",
-        thread: "",
-        level: "",
-        logger: "",
-        message: ""
+    
       },
-      dateValid: false,
-      threadValid: false,
-      levelValid: false,
-      loggerValid: false,
-      messageValid: false,
-      formValid: false
+    
     };
   }
 
@@ -124,7 +106,7 @@ class LogsCreate extends React.Component {
     return (
       <React.Fragment>
         <div>
-          <h1>ELEVEIGHT NEW LOG</h1>
+         
           <hr />
         </div>
         <div>
