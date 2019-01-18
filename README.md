@@ -1,6 +1,6 @@
 ## Work Samples
 
-[robertpaulrespicio.com](robertpaulrespicio.com)
+[robertpaulrespicio.com](www.robertpaulrespicio.com)
 
 This repository is a broad selection of code samples, selected to show examples of my work over multiple projects (current to present). My most current project, eleveight inc., styling was pre-determined per clients request and followed accordingly. It is a MVP product for the client to present to future consumers and is deployed but you can only view it by invite only(it will only show you the log in screen). So I have provided pictures, along with sample code of this project.
 
